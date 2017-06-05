@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, minimal-ui" />
+		<meta name="Keywords" content="" />
+		<meta name="Description" content="" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+		<meta name="format-detection" content="telephone=no, email=no" />
+		<title>罗马数字转换</title>
+		<style type="text/css">
+			body,
+			p,
+			div,
+			ol,
+			ul,
+			li,
+			dl,
+			dt,
+			dd,
+			h1,
+			h2,
+			h3,
+			h4,
+			h5,
+			h6,
+			form,
+			input,
+			iframe,
+			nav {
+				margin: 0;
+				padding: 0;
+			}
+			
+			body {
+				font: 16px Microsoft YaHei;
+			}
+			
+			a {
+				text-decoration: none;
+			}
+			
+			ol,
+			ul {
+				list-style: none;
+			}
+			
+			.wrapper {
+				width: 100%;
+				margin: 0 auto;
+			}
+			
+			.wrapper h1 {
+				text-align: center;
+				color: #333;
+				margin: 30px auto;
+				font: 20px Microsoft YaHei;
+			}
+			
+			.p1 {
+				width: 100%;
+				margin: 30px auto;
+				text-align: center;
+			}
+			
+			.p1 input {
+				outline: none;
+				width: 50%;
+				height: 38px;
+				border: 1px solid #ccc;
+				font-size: 16px;
+				border-radius: 3px;
+				box-sizing: border-box;
+				padding: 0 10px;
+				color: #666;
+				transition: .6s;
+			}
+			
+			.p1 input:focus {
+				border: 1px solid #0ae;
+			}
+			
+			.btn1 {
+				display: block;
+				width: 125px;
+				height: 40px;
+				background: #0ae;
+				font: 14px Microsoft YaHei;
+				margin: 20px auto 0 auto;
+				border-radius: 5px;
+				outline: none;
+				border: 0;
+				color: #fff;
+				cursor: pointer;
+				transition: .5s;
+			}
+			
+			.btn1:hover {
+				background: #09d;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="wrapper">
+			<h1>罗马数字转换</h1>
+			<p class="p1"><input class="input" type="text" placeholder="请输入小于5000的数字" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"></p>
+			<button class="btn1">立即生成罗马数字</button>
+			<p class="p1"><input class="output" type="text" placeholder="转换后的罗马数字" readonly="readonly"></p>
+		</div>
+		<script type="text/javascript">
+			var btn = document.querySelector(".btn1");
+
+			btn.onclick = function() {
+				var ipt = document.querySelector(".input"),
+					opt = document.querySelector(".output");
+
+				function convert(num) {
+					var nums = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1];
+					var romans = ["m", "cm", "d", "cd", "c", "xc", "l", "xl", "x", "ix", "v", "iv", "i"];
+					var str = '';
+					nums.forEach(function(item, index, array) {
+						while(num >= item) {
+							str += romans[index];
+							num -= item;
+						}
+					});
+					return str.toUpperCase();
+				}
+
+				if(parseInt(ipt.value) > 5000 || ipt.value === "") {
+					ipt.value = "";
+					opt.value = "";
+					alert("请输入小于5000的数字");
+				} else {
+					opt.value = convert(ipt.value);
+					console.log(opt.value)
+				}
+			}
+		</script>
+	</body>
+
+</html>
